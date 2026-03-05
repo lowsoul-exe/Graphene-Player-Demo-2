@@ -1,0 +1,1398 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Online music player" />
+    <meta name="keywords" content="music, player, lastfm, graphene Player" />
+    <meta name="author" content="David" />
+    <title>Graphene Player</title>
+    <link rel="stylesheet" href="output.css" />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/gsap.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/ScrollTrigger.min.js"></script>
+    <!-- ScrollSmoother requires ScrollTrigger -->
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/ScrollSmoother.min.js"></script>
+    <script type="module" src="script.js"></script>
+  </head>
+  <body>
+    <div id="content">
+      <nav>
+        <div class="flex flex-wrap items-center gap-4">
+          <div id="logo" class="flex items-center gap-2 whitespace-nowrap">
+            <div class="">
+              <span class="text-text font-bold">Graphene</span>
+              <span class="text-accent font-bold"> Player</span>
+            </div>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="icon-16 fill-accent"
+              viewBox="0 0 256 256"
+            >
+              <path
+                d="M240,128a15.74,15.74,0,0,1-7.6,13.51L88.32,229.65a16,16,0,0,1-16.2.3A15.86,15.86,0,0,1,64,216.13V39.87a15.86,15.86,0,0,1,8.12-13.82,16,16,0,0,1,16.2.3L232.4,114.49A15.74,15.74,0,0,1,240,128Z"
+              ></path>
+            </svg>
+          </div>
+          <div class="flex items-center gap-2" id="sources">
+            <button
+              id="spotify"
+              class="button flex min-h-8 min-w-8 items-center justify-center"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="icon-16"
+                viewBox="0 0 256 256"
+              >
+                <path
+                  d="M128,20A108,108,0,1,0,236,128,108.12,108.12,0,0,0,128,20Zm0,192a84,84,0,1,1,84-84A84.09,84.09,0,0,1,128,212Zm66.59-84.36a12,12,0,0,1-16.24,4.93,106.7,106.7,0,0,0-100.7,0A11.83,11.83,0,0,1,72,134a12,12,0,0,1-5.66-22.58,130.61,130.61,0,0,1,123.3,0A12,12,0,0,1,194.59,127.64Zm-16,36a12,12,0,0,1-16.23,5,73,73,0,0,0-68.72,0,12,12,0,0,1-11.28-21.18,97,97,0,0,1,91.28,0A12,12,0,0,1,178.59,163.64Z"
+                ></path>
+              </svg>
+            </button>
+            <button
+              id="soundcloud"
+              class="button flex min-h-8 min-w-8 items-center justify-center"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="icon-16"
+                viewBox="0 0 256 256"
+              >
+                <path
+                  d="M32,120v48a12,12,0,0,1-24,0V120a12,12,0,0,1,24,0ZM60,84A12,12,0,0,0,48,96v96a12,12,0,0,0,24,0V96A12,12,0,0,0,60,84Zm40-40A12,12,0,0,0,88,56V192a12,12,0,0,0,24,0V56A12,12,0,0,0,100,44Zm122.34,59.33A84,84,0,0,0,140,36a12,12,0,0,0,0,24,59.78,59.78,0,0,1,59.7,53.93,12,12,0,0,0,9.66,10.58A28,28,0,0,1,204,180H140a12,12,0,0,0,0,24h64a52,52,0,0,0,18.34-100.67Z"
+                ></path>
+              </svg>
+            </button>
+            <button
+              id="lastfm"
+              class="button flex min-h-8 min-w-8 items-center justify-center"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="icon-16"
+                viewBox="0 0 256 256"
+              >
+                <path
+                  d="M252,160a44.05,44.05,0,0,1-44,44H190.57a60.2,60.2,0,0,1-54.37-34.63l-30.15-64.59A36.13,36.13,0,0,0,73.43,84H64a36,36,0,0,0-36,36v24a36,36,0,0,0,36,36h8a28,28,0,0,0,25.68-16.8,12,12,0,1,1,22,9.6A52,52,0,0,1,72,204H64A60.07,60.07,0,0,1,4,144V120A60.07,60.07,0,0,1,64,60h9.43A60.2,60.2,0,0,1,127.8,94.63L158,159.22A36.13,36.13,0,0,0,190.57,180H208a20,20,0,0,0,0-40H188a40,40,0,0,1,0-80h20a36,36,0,0,1,36,36,12,12,0,0,1-24,0,12,12,0,0,0-12-12H188a16,16,0,0,0,0,32h20A44.05,44.05,0,0,1,252,160Z"
+                ></path>
+              </svg>
+            </button>
+            <button
+              id="youtube"
+              class="button flex min-h-8 min-w-8 items-center justify-center"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="icon-16"
+                viewBox="0 0 256 256"
+              >
+                <path
+                  d="M170.49,117.91l-56-36A12,12,0,0,0,96,92v72a12,12,0,0,0,18.49,10.09l56-36a12,12,0,0,0,0-20.18ZM120,142V114l21.81,14Zm118.21-73.5a28.05,28.05,0,0,0-16.93-19.14C186.4,35.91,131.29,36,128,36s-58.4-.09-93.28,13.38A28.05,28.05,0,0,0,17.79,68.52C15.15,78.72,12,97.32,12,128s3.15,49.28,5.79,59.48a28.05,28.05,0,0,0,16.93,19.14C68.21,219.55,120.36,220,127.37,220h1.26c7,0,59.16-.45,92.65-13.38a28.05,28.05,0,0,0,16.93-19.14c2.64-10.2,5.79-28.8,5.79-59.48S240.85,78.72,238.21,68.52ZM215,181.46a4,4,0,0,1-2.34,2.77C182.78,195.76,132.27,196,128.32,196h-.39c-.53,0-53.64.17-84.56-11.77A4,4,0,0,1,41,181.46c-1.88-7.24-5-23.82-5-53.46s3.15-46.22,5-53.46a4,4,0,0,1,2.34-2.77C74.29,59.83,127.39,60,127.92,60h.15c.54,0,53.64-.17,84.56,11.77A4,4,0,0,1,215,74.54c1.88,7.24,5,23.82,5,53.46S216.85,174.22,215,181.46Z"
+                ></path>
+              </svg>
+            </button>
+          </div>
+        </div>
+        <div class="flex flex-1 items-center gap-2">
+          <button
+            class="button flex min-h-8 min-w-8 items-center justify-center"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="icon-16"
+              viewBox="0 0 256 256"
+            >
+              <path
+                d="M252,152a12,12,0,0,1-12,12H228v12a12,12,0,0,1-24,0V164H192a12,12,0,0,1,0-24h12V128a12,12,0,0,1,24,0v12h12A12,12,0,0,1,252,152ZM56,76H68V88a12,12,0,0,0,24,0V76h12a12,12,0,1,0,0-24H92V40a12,12,0,0,0-24,0V52H56a12,12,0,0,0,0,24ZM184,188h-4v-4a12,12,0,0,0-24,0v4h-4a12,12,0,0,0,0,24h4v4a12,12,0,0,0,24,0v-4h4a12,12,0,0,0,0-24ZM222.14,82.83,82.82,222.14a20,20,0,0,1-28.28,0L33.85,201.46a20,20,0,0,1,0-28.29L173.17,33.86a20,20,0,0,1,28.28,0l20.69,20.68A20,20,0,0,1,222.14,82.83ZM159,112,144,97,53.65,187.31l15,15Zm43.31-43.31-15-15L161,80l15,15Z"
+              ></path>
+            </svg>
+          </button>
+          <input
+            type="text"
+            placeholder="Search for songs, artists or albums"
+            class="button text-normal min-h-8 w-full min-w-25 pr-3 pl-2"
+          />
+          <button
+            class="button text-normal flex min-h-8 items-center justify-center gap-2 px-4"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="icon-12"
+              viewBox="0 0 256 256"
+            >
+              <path
+                d="M232.49,215.51,185,168a92.12,92.12,0,1,0-17,17l47.53,47.54a12,12,0,0,0,17-17ZM44,112a68,68,0,1,1,68,68A68.07,68.07,0,0,1,44,112Z"
+              ></path>
+            </svg>
+            Search
+          </button>
+        </div>
+        <div class="flex items-center gap-2">
+          <button
+            class="button flex min-h-8 min-w-8 items-center justify-center"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="icon-16"
+              viewBox="0 0 256 256"
+            >
+              <path
+                d="M225.29,165.93C216.61,151,212,129.57,212,104a84,84,0,0,0-168,0c0,25.58-4.59,47-13.27,61.93A20.08,20.08,0,0,0,30.66,186,19.77,19.77,0,0,0,48,196H208a19.77,19.77,0,0,0,17.31-10A20.08,20.08,0,0,0,225.29,165.93ZM54.66,172C63.51,154,68,131.14,68,104a60,60,0,0,1,120,0c0,27.13,4.48,50,13.33,68ZM172,224a12,12,0,0,1-12,12H96a12,12,0,0,1,0-24h64A12,12,0,0,1,172,224Z"
+              ></path>
+            </svg>
+          </button>
+          <button
+            class="button text-normal flex min-h-8 items-center justify-center gap-2 px-4"
+          >
+            Signup
+          </button>
+          <button
+            class="button text-normal bg-accent text-element flex min-h-8 items-center justify-center gap-2 px-4 font-semibold"
+          >
+            Login
+          </button>
+        </div>
+      </nav>
+<div id="middle">
+        <aside id="left-bar">
+          <div class="flex w-full flex-col items-center gap-2">
+            <button id="collapse-left-bar"
+              class="button text-normal flex min-h-8 w-full items-center justify-between gap-2 pr-3 pl-2"
+            >
+              <span>Home</span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="icon-12"
+                viewBox="0 0 256 256"
+              >
+                <path
+                  d="M184.49,136.49l-80,80a12,12,0,0,1-17-17L159,128,87.51,56.49a12,12,0,1,1,17-17l80,80A12,12,0,0,1,184.49,136.49Z"
+                ></path>
+              </svg>
+            </button>
+            <button
+              class="button text-normal flex min-h-8 w-full items-center justify-between gap-2 pr-3 pl-2"
+            >
+              <div class="flex items-center gap-2">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="icon-12"
+                  viewBox="0 0 256 256"
+                >
+                  <path
+                    d="M178,36c-20.09,0-37.92,7.93-50,21.56C115.92,43.93,98.09,36,78,36a66.08,66.08,0,0,0-66,66c0,72.34,105.81,130.14,110.31,132.57a12,12,0,0,0,11.38,0C138.19,232.14,244,174.34,244,102A66.08,66.08,0,0,0,178,36Zm-5.49,142.36A328.69,328.69,0,0,1,128,210.16a328.69,328.69,0,0,1-44.51-31.8C61.82,159.77,36,131.42,36,102A42,42,0,0,1,78,60c17.8,0,32.7,9.4,38.89,24.54a12,12,0,0,0,22.22,0C145.3,69.4,160.2,60,178,60a42,42,0,0,1,42,42C220,131.42,194.18,159.77,172.51,178.36Z"
+                  ></path>
+                </svg>
+                <span>Favorites</span>
+              </div>
+            </button>
+            <button
+              class="button text-normal flex min-h-8 w-full items-center justify-between gap-2 pr-3 pl-2"
+            >
+              <div class="flex items-center gap-2">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="icon-12"
+                  viewBox="0 0 256 256"
+                >
+                  <path
+                    d="M28,64A12,12,0,0,1,40,52H216a12,12,0,0,1,0,24H40A12,12,0,0,1,28,64Zm12,76H156a12,12,0,0,0,0-24H40a12,12,0,0,0,0,24Zm68,40H40a12,12,0,0,0,0,24h68a12,12,0,0,0,0-24Zm143.49-52.55a12,12,0,0,1-14.94,8L212,128.13V192a36,36,0,1,1-24-33.94V112a12,12,0,0,1,15.45-11.49l40,12A12,12,0,0,1,251.49,127.45ZM188,192a12,12,0,1,0-12,12A12,12,0,0,0,188,192Z"
+                  ></path>
+                </svg>
+                <span>Playlists</span>
+              </div>
+            </button>
+            <button
+              class="button text-normal flex min-h-8 w-full items-center justify-between gap-2 pr-3 pl-2"
+            >
+              <div class="flex items-center gap-2">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="icon-12"
+                  viewBox="0 0 256 256"
+                >
+                  <path
+                    d="M160,96H96a52,52,0,0,0,0,104h64a52,52,0,0,0,0-104Zm0,80H96a28,28,0,0,1,0-56h64a28,28,0,0,1,0,56Zm-48-28a16,16,0,1,1-16-16A16,16,0,0,1,112,148Zm64,0a16,16,0,1,1-16-16A16,16,0,0,1,176,148ZM212,36a36,36,0,0,0-33.94,24H77.94A36,36,0,0,0,8,72v76a88.1,88.1,0,0,0,88,88h64a88.1,88.1,0,0,0,88-88V72A36,36,0,0,0,212,36Zm12,112a64.07,64.07,0,0,1-64,64H96a64.07,64.07,0,0,1-64-64V72a12,12,0,0,1,24,0A12,12,0,0,0,68,84H188a12,12,0,0,0,12-12,12,12,0,0,1,24,0Z"
+                  ></path>
+                </svg>
+                <span>Artists</span>
+              </div>
+            </button>
+            <button
+              class="button text-normal flex min-h-8 w-full items-center justify-between gap-2 pr-3 pl-2"
+            >
+              <div class="flex items-center gap-2">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="icon-12"
+                  viewBox="0 0 256 256"
+                >
+                  <path
+                    d="M161.36,130a40,40,0,1,0-66.72,0,28.35,28.35,0,0,0-4.52,4.51,27.86,27.86,0,0,0-5.42,23.67l12.75,56A27.87,27.87,0,0,0,124.77,236h6.46a27.87,27.87,0,0,0,27.32-21.79l12.75-56a27.86,27.86,0,0,0-5.42-23.67A28.35,28.35,0,0,0,161.36,130ZM128,92a16,16,0,1,1-16,16A16,16,0,0,1,128,92Zm19.89,60.88-12.74,56a4,4,0,0,1-3.92,3.12h-6.46a4,4,0,0,1-3.92-3.12l-12.74-56a3.92,3.92,0,0,1,.77-3.37A4,4,0,0,1,112,148H144a4,4,0,0,1,3.15,1.51A3.92,3.92,0,0,1,147.89,152.88ZM236,128a107.88,107.88,0,0,1-38,82.21A12,12,0,0,1,182.47,192a84,84,0,1,0-108.94,0A12,12,0,0,1,58,210.21,108,108,0,1,1,236,128Z"
+                  ></path>
+                </svg>
+                <span>Podcasts</span>
+              </div>
+            </button>
+            <button
+              class="button text-normal flex min-h-8 w-full items-center justify-between gap-2 pr-3 pl-2"
+              
+            >
+              <div class="flex items-center gap-2">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="icon-12"
+                  viewBox="0 0 256 256"
+                >
+                  <path
+                    d="M71.51,88.49a12,12,0,0,1,17-17L116,99V24a12,12,0,0,1,24,0V99l27.51-27.52a12,12,0,0,1,17,17l-48,48a12,12,0,0,1-17,0ZM224,116H188a12,12,0,0,0,0,24h32v56H36V140H68a12,12,0,0,0,0-24H32a20,20,0,0,0-20,20v64a20,20,0,0,0,20,20H224a20,20,0,0,0,20-20V136A20,20,0,0,0,224,116Zm-20,52a16,16,0,1,0-16,16A16,16,0,0,0,204,168Z"
+                  ></path>
+                </svg>
+                <span>Downloads</span>
+              </div>
+            </button>
+            <div class="bg-subtext my-1 h-0.5 w-20 rounded-full"></div>
+            <span class="text-normal font-bold">Playlists</span>
+            <button
+              class="button text-normal flex w-full items-center justify-between gap-2 py-2 pr-3 pl-2"
+            >
+              <div class="flex items-center gap-2">
+                <img
+                  loading="lazy"
+                  class="image-24"
+                  src="https://i.postimg.cc/tCyLybnJ/image14.avif"
+                  alt=""
+                />
+                <span>Night</span>
+              </div>
+            </button>
+            <button
+              class="button text-normal flex w-full items-center justify-between gap-2 py-2 pr-3 pl-2"
+            >
+              <div class="flex items-center gap-2">
+                <img
+                  loading="lazy"
+                  class="image-24"
+                  src="https://i.postimg.cc/7YDpD4J5/image_(14).avif"
+                  alt=""
+                />
+                <span>Breakcore</span>
+              </div>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="icon-12"
+                viewBox="0 0 256 256"
+              >
+                <path
+                  d="M60,96v64a12,12,0,0,1-24,0V96a12,12,0,0,1,24,0ZM88,20A12,12,0,0,0,76,32V224a12,12,0,0,0,24,0V32A12,12,0,0,0,88,20Zm40,32a12,12,0,0,0-12,12V192a12,12,0,0,0,24,0V64A12,12,0,0,0,128,52Zm40,32a12,12,0,0,0-12,12v64a12,12,0,0,0,24,0V96A12,12,0,0,0,168,84Zm40-16a12,12,0,0,0-12,12v96a12,12,0,0,0,24,0V80A12,12,0,0,0,208,68Z"
+                ></path>
+              </svg>
+            </button>
+            <button
+              class="button text-normal flex w-full items-center justify-between gap-2 py-2 pr-3 pl-2"
+            >
+              <div class="flex items-center gap-2">
+                <img
+                  loading="lazy"
+                  class="image-24"
+                  src="https://i.postimg.cc/Pq4jR2qt/image-(13).avif"
+                  alt=""
+                />
+                <span>Witch House</span>
+              </div>
+            </button>
+            <button
+              class="button text-normal flex w-full items-center justify-between gap-2 py-2 pr-3 pl-2"
+            >
+              <div class="flex items-center gap-2">
+                <img
+                  loading="lazy"
+                  class="image-24"
+                  src="https://i.postimg.cc/m2R0R41h/image_(16).avif"
+                  alt=""
+                />
+                <span>Alternative Rock</span>
+              </div>
+            </button>
+            <button
+              class="button text-normal flex w-full items-center justify-between gap-2 py-2 pr-3 pl-2"
+            >
+              <div class="flex items-center gap-2">
+                <img
+                  loading="lazy"
+                  class="image-24"
+                  src="https://i.postimg.cc/5N1Z1JQQ/image_(17).avif"
+                  alt=""
+                />
+                <span>House</span>
+              </div>
+            </button>
+          </div>
+          <span class="subtext-normal text-center"
+            >Tracks provided by LastFM™ and distributed by Graphene</span
+          >
+        </aside>
+        <main>
+          <div class="flex w-fit flex-col gap-4">
+            <div class="flex flex-col gap-1">
+              <span class="text-normal text-[1.2rem] font-bold"
+                >Welcome back!</span
+              >
+              <span class="subtext-normal text-xs"
+                >Let's pick a track to listen to</span
+              >
+            </div>
+            <button
+              class="button text-normal flex min-h-8 w-fit items-center justify-center gap-2 px-4"
+            >
+              Discover
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="icon-12"
+                viewBox="0 0 256 256"
+              >
+                <path
+                  d="M184.49,136.49l-80,80a12,12,0,0,1-17-17L159,128,87.51,56.49a12,12,0,1,1,17-17l80,80A12,12,0,0,1,184.49,136.49Z"
+                ></path>
+              </svg>
+            </button>
+          </div>
+          <div class="grid">
+            <button class="card">
+              <img
+                class="image-160"
+                loading="lazy"
+                src="https://i.postimg.cc/cCddJ25m/image_(7).avif"
+                alt=""
+              />
+              <div class="flex items-center justify-between gap-1 px-1">
+                <div class="flex flex-col items-start gap-0.5">
+                  <span class="text-normal text-[0.8rem] font-bold"
+                    >Interlinked</span
+                  >
+                  <span class="subtext-normal">Lonely Lies, Goldkid$</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="icon-16"
+                    viewBox="0 0 256 256"
+                  >
+                    <path
+                      d="M28,64A12,12,0,0,1,40,52H216a12,12,0,0,1,0,24H40A12,12,0,0,1,28,64Zm104,52H40a12,12,0,0,0,0,24h92a12,12,0,0,0,0-24Zm0,64H40a12,12,0,0,0,0,24h92a12,12,0,0,0,0-24Zm120-20a12,12,0,0,1-5.64,10.18l-64,40A12,12,0,0,1,164,200V120a12,12,0,0,1,18.36-10.18l64,40A12,12,0,0,1,252,160Zm-34.64,0L188,141.65v36.7Z"
+                    ></path>
+                  </svg>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="icon-16"
+                    viewBox="0 0 256 256"
+                  >
+                    <path
+                      d="M240,128a15.74,15.74,0,0,1-7.6,13.51L88.32,229.65a16,16,0,0,1-16.2.3A15.86,15.86,0,0,1,64,216.13V39.87a15.86,15.86,0,0,1,8.12-13.82,16,16,0,0,1,16.2.3L232.4,114.49A15.74,15.74,0,0,1,240,128Z"
+                    ></path>
+                  </svg>
+                </div>
+              </div>
+            </button>
+            <button class="card">
+              <img
+                class="image-160"
+                loading="lazy"
+                src="https://i.postimg.cc/0j99NFHC/image_(8).avif"
+                alt=""
+              />
+              <div class="flex items-center justify-between px-1">
+                <div class="flex flex-col items-start gap-0.5">
+                  <span class="text-normal text-[0.8rem] font-bold"
+                    >Apologize</span
+                  >
+                  <span class="subtext-normal">Lowx</span>
+                </div>
+                <div class="flex items-center gap-3">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="icon-16"
+                    viewBox="0 0 256 256"
+                  >
+                    <path
+                      d="M28,64A12,12,0,0,1,40,52H216a12,12,0,0,1,0,24H40A12,12,0,0,1,28,64Zm104,52H40a12,12,0,0,0,0,24h92a12,12,0,0,0,0-24Zm0,64H40a12,12,0,0,0,0,24h92a12,12,0,0,0,0-24Zm120-20a12,12,0,0,1-5.64,10.18l-64,40A12,12,0,0,1,164,200V120a12,12,0,0,1,18.36-10.18l64,40A12,12,0,0,1,252,160Zm-34.64,0L188,141.65v36.7Z"
+                    ></path>
+                  </svg>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="icon-16"
+                    viewBox="0 0 256 256"
+                  >
+                    <path
+                      d="M240,128a15.74,15.74,0,0,1-7.6,13.51L88.32,229.65a16,16,0,0,1-16.2.3A15.86,15.86,0,0,1,64,216.13V39.87a15.86,15.86,0,0,1,8.12-13.82,16,16,0,0,1,16.2.3L232.4,114.49A15.74,15.74,0,0,1,240,128Z"
+                    ></path>
+                  </svg>
+                </div>
+              </div>
+            </button>
+            <button class="card">
+              <img
+                class="image-160"
+                loading="lazy"
+                src="https://i.postimg.cc/Pq4jR2qt/image-(13).avif"
+                alt=""
+              />
+              <div class="flex items-center justify-between px-1">
+                <div class="flex flex-col items-start gap-0.5">
+                  <span class="text-normal text-[0.8rem] font-bold">MΞLT</span>
+                  <span class="subtext-normal">▽, Untitled Burial</span>
+                </div>
+                <div class="flex items-center gap-3">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="icon-16"
+                    viewBox="0 0 256 256"
+                  >
+                    <path
+                      d="M28,64A12,12,0,0,1,40,52H216a12,12,0,0,1,0,24H40A12,12,0,0,1,28,64Zm104,52H40a12,12,0,0,0,0,24h92a12,12,0,0,0,0-24Zm0,64H40a12,12,0,0,0,0,24h92a12,12,0,0,0,0-24Zm120-20a12,12,0,0,1-5.64,10.18l-64,40A12,12,0,0,1,164,200V120a12,12,0,0,1,18.36-10.18l64,40A12,12,0,0,1,252,160Zm-34.64,0L188,141.65v36.7Z"
+                    ></path>
+                  </svg>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="icon-16"
+                    viewBox="0 0 256 256"
+                  >
+                    <path
+                      d="M240,128a15.74,15.74,0,0,1-7.6,13.51L88.32,229.65a16,16,0,0,1-16.2.3A15.86,15.86,0,0,1,64,216.13V39.87a15.86,15.86,0,0,1,8.12-13.82,16,16,0,0,1,16.2.3L232.4,114.49A15.74,15.74,0,0,1,240,128Z"
+                    ></path>
+                  </svg>
+                </div>
+              </div>
+            </button>
+            <button class="card">
+              <img
+                class="image-160"
+                loading="lazy"
+                src="https://i.postimg.cc/vTGGmkSP/image_(9).avif"
+                alt=""
+              />
+              <div class="flex items-center justify-between px-1">
+                <div class="flex flex-col items-start gap-0.5">
+                  <span class="text-normal text-[0.8rem] font-bold"
+                    >Euphoria</span
+                  >
+                  <span class="subtext-normal">VØJ, Narvent, KoruSe</span>
+                </div>
+                <div class="flex items-center gap-3">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="icon-16"
+                    viewBox="0 0 256 256"
+                  >
+                    <path
+                      d="M28,64A12,12,0,0,1,40,52H216a12,12,0,0,1,0,24H40A12,12,0,0,1,28,64Zm104,52H40a12,12,0,0,0,0,24h92a12,12,0,0,0,0-24Zm0,64H40a12,12,0,0,0,0,24h92a12,12,0,0,0,0-24Zm120-20a12,12,0,0,1-5.64,10.18l-64,40A12,12,0,0,1,164,200V120a12,12,0,0,1,18.36-10.18l64,40A12,12,0,0,1,252,160Zm-34.64,0L188,141.65v36.7Z"
+                    ></path>
+                  </svg>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="icon-16"
+                    viewBox="0 0 256 256"
+                  >
+                    <path
+                      d="M240,128a15.74,15.74,0,0,1-7.6,13.51L88.32,229.65a16,16,0,0,1-16.2.3A15.86,15.86,0,0,1,64,216.13V39.87a15.86,15.86,0,0,1,8.12-13.82,16,16,0,0,1,16.2.3L232.4,114.49A15.74,15.74,0,0,1,240,128Z"
+                    ></path>
+                  </svg>
+                </div>
+              </div>
+            </button>
+            <button class="card">
+              <img
+                class="image-160"
+                loading="lazy"
+                src="https://i.postimg.cc/vTGGmkS2/image_(11).avif"
+                alt=""
+              />
+              <div class="flex items-center justify-between px-1">
+                <div class="flex flex-col items-start gap-0.5">
+                  <span class="text-normal text-[0.8rem] font-bold"
+                    >Te rog</span
+                  >
+                  <span class="subtext-normal">Carla's Dreams</span>
+                </div>
+                <div class="flex items-center gap-3">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="icon-16"
+                    viewBox="0 0 256 256"
+                  >
+                    <path
+                      d="M28,64A12,12,0,0,1,40,52H216a12,12,0,0,1,0,24H40A12,12,0,0,1,28,64Zm104,52H40a12,12,0,0,0,0,24h92a12,12,0,0,0,0-24Zm0,64H40a12,12,0,0,0,0,24h92a12,12,0,0,0,0-24Zm120-20a12,12,0,0,1-5.64,10.18l-64,40A12,12,0,0,1,164,200V120a12,12,0,0,1,18.36-10.18l64,40A12,12,0,0,1,252,160Zm-34.64,0L188,141.65v36.7Z"
+                    ></path>
+                  </svg>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="icon-16"
+                    viewBox="0 0 256 256"
+                  >
+                    <path
+                      d="M240,128a15.74,15.74,0,0,1-7.6,13.51L88.32,229.65a16,16,0,0,1-16.2.3A15.86,15.86,0,0,1,64,216.13V39.87a15.86,15.86,0,0,1,8.12-13.82,16,16,0,0,1,16.2.3L232.4,114.49A15.74,15.74,0,0,1,240,128Z"
+                    ></path>
+                  </svg>
+                </div>
+              </div>
+            </button>
+            <button class="card">
+              <img
+                class="image-160"
+                loading="lazy"
+                src="https://i.postimg.cc/1Xyyz2YJ/image_(5).avif"
+                alt=""
+              />
+              <div class="flex items-center justify-between px-1">
+                <div class="flex flex-col items-start gap-0.5">
+                  <span class="text-normal text-[0.8rem] font-bold"
+                    >White Light</span
+                  >
+                  <span class="subtext-normal">Sidewalks and Skelet...</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="icon-16"
+                    viewBox="0 0 256 256"
+                  >
+                    <path
+                      d="M28,64A12,12,0,0,1,40,52H216a12,12,0,0,1,0,24H40A12,12,0,0,1,28,64Zm104,52H40a12,12,0,0,0,0,24h92a12,12,0,0,0,0-24Zm0,64H40a12,12,0,0,0,0,24h92a12,12,0,0,0,0-24Zm120-20a12,12,0,0,1-5.64,10.18l-64,40A12,12,0,0,1,164,200V120a12,12,0,0,1,18.36-10.18l64,40A12,12,0,0,1,252,160Zm-34.64,0L188,141.65v36.7Z"
+                    ></path>
+                  </svg>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="icon-16"
+                    viewBox="0 0 256 256"
+                  >
+                    <path
+                      d="M240,128a15.74,15.74,0,0,1-7.6,13.51L88.32,229.65a16,16,0,0,1-16.2.3A15.86,15.86,0,0,1,64,216.13V39.87a15.86,15.86,0,0,1,8.12-13.82,16,16,0,0,1,16.2.3L232.4,114.49A15.74,15.74,0,0,1,240,128Z"
+                    ></path>
+                  </svg>
+                </div>
+              </div>
+            </button>
+            <button class="card">
+              <img
+                class="image-160"
+                loading="lazy"
+                src="https://i.postimg.cc/j2RRjmk9/image_(12).avif"
+                alt=""
+              />
+              <div class="flex items-center justify-between px-1">
+                <div class="flex flex-col items-start gap-0.5">
+                  <span class="text-normal text-[0.8rem] font-bold"
+                    >Let it go</span
+                  >
+                  <span class="subtext-normal">Mylesxiety</span>
+                </div>
+                <div class="flex items-center gap-3">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="icon-16"
+                    viewBox="0 0 256 256"
+                  >
+                    <path
+                      d="M28,64A12,12,0,0,1,40,52H216a12,12,0,0,1,0,24H40A12,12,0,0,1,28,64Zm104,52H40a12,12,0,0,0,0,24h92a12,12,0,0,0,0-24Zm0,64H40a12,12,0,0,0,0,24h92a12,12,0,0,0,0-24Zm120-20a12,12,0,0,1-5.64,10.18l-64,40A12,12,0,0,1,164,200V120a12,12,0,0,1,18.36-10.18l64,40A12,12,0,0,1,252,160Zm-34.64,0L188,141.65v36.7Z"
+                    ></path>
+                  </svg>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="icon-16"
+                    viewBox="0 0 256 256"
+                  >
+                    <path
+                      d="M240,128a15.74,15.74,0,0,1-7.6,13.51L88.32,229.65a16,16,0,0,1-16.2.3A15.86,15.86,0,0,1,64,216.13V39.87a15.86,15.86,0,0,1,8.12-13.82,16,16,0,0,1,16.2.3L232.4,114.49A15.74,15.74,0,0,1,240,128Z"
+                    ></path>
+                  </svg>
+                </div>
+              </div>
+            </button>
+            <button class="card">
+              <img
+                class="image-160"
+                loading="lazy"
+                src="https://i.postimg.cc/C5wwKX6P/image_(10).avif"
+                alt=""
+              />
+              <div class="flex items-center justify-between px-1">
+                <div class="flex flex-col items-start gap-0.5">
+                  <span class="text-normal text-[0.8rem] font-bold">Link</span>
+                  <span class="subtext-normal">Jim Yosef</span>
+                </div>
+                <div class="flex items-center gap-3">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="icon-16"
+                    viewBox="0 0 256 256"
+                  >
+                    <path
+                      d="M28,64A12,12,0,0,1,40,52H216a12,12,0,0,1,0,24H40A12,12,0,0,1,28,64Zm104,52H40a12,12,0,0,0,0,24h92a12,12,0,0,0,0-24Zm0,64H40a12,12,0,0,0,0,24h92a12,12,0,0,0,0-24Zm120-20a12,12,0,0,1-5.64,10.18l-64,40A12,12,0,0,1,164,200V120a12,12,0,0,1,18.36-10.18l64,40A12,12,0,0,1,252,160Zm-34.64,0L188,141.65v36.7Z"
+                    ></path>
+                  </svg>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="icon-16"
+                    viewBox="0 0 256 256"
+                  >
+                    <path
+                      d="M240,128a15.74,15.74,0,0,1-7.6,13.51L88.32,229.65a16,16,0,0,1-16.2.3A15.86,15.86,0,0,1,64,216.13V39.87a15.86,15.86,0,0,1,8.12-13.82,16,16,0,0,1,16.2.3L232.4,114.49A15.74,15.74,0,0,1,240,128Z"
+                    ></path>
+                  </svg>
+                </div>
+              </div>
+            </button>
+            <button class="card">
+              <img
+                class="image-160"
+                loading="lazy"
+                src="https://i.postimg.cc/HnTTLRP6/image_(6).avif"
+                alt=""
+              />
+              <div class="flex items-center justify-between px-1">
+                <div class="flex flex-col items-start gap-0.5">
+                  <span class="text-normal text-[0.8rem] font-bold"
+                    >please.</span
+                  >
+                  <span class="subtext-normal">wiv.</span>
+                </div>
+                <div class="flex items-center gap-3">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="icon-16"
+                    viewBox="0 0 256 256"
+                  >
+                    <path
+                      d="M28,64A12,12,0,0,1,40,52H216a12,12,0,0,1,0,24H40A12,12,0,0,1,28,64Zm104,52H40a12,12,0,0,0,0,24h92a12,12,0,0,0,0-24Zm0,64H40a12,12,0,0,0,0,24h92a12,12,0,0,0,0-24Zm120-20a12,12,0,0,1-5.64,10.18l-64,40A12,12,0,0,1,164,200V120a12,12,0,0,1,18.36-10.18l64,40A12,12,0,0,1,252,160Zm-34.64,0L188,141.65v36.7Z"
+                    ></path>
+                  </svg>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="icon-16"
+                    viewBox="0 0 256 256"
+                  >
+                    <path
+                      d="M240,128a15.74,15.74,0,0,1-7.6,13.51L88.32,229.65a16,16,0,0,1-16.2.3A15.86,15.86,0,0,1,64,216.13V39.87a15.86,15.86,0,0,1,8.12-13.82,16,16,0,0,1,16.2.3L232.4,114.49A15.74,15.74,0,0,1,240,128Z"
+                    ></path>
+                  </svg>
+                </div>
+              </div>
+            </button>
+            <button class="card">
+              <img
+                class="image-160"
+                loading="lazy"
+                src="https://i.postimg.cc/GmY1PMRc/image(6).avif"
+                alt=""
+              />
+              <div class="flex items-center justify-between px-1">
+                <div class="flex flex-col items-start gap-0.5">
+                  <span class="text-normal text-[0.8rem] font-bold"
+                    >i love u.</span
+                  >
+                  <span class="subtext-normal">wiv.</span>
+                </div>
+                <div class="flex items-center gap-3">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="icon-16"
+                    viewBox="0 0 256 256"
+                  >
+                    <path
+                      d="M28,64A12,12,0,0,1,40,52H216a12,12,0,0,1,0,24H40A12,12,0,0,1,28,64Zm104,52H40a12,12,0,0,0,0,24h92a12,12,0,0,0,0-24Zm0,64H40a12,12,0,0,0,0,24h92a12,12,0,0,0,0-24Zm120-20a12,12,0,0,1-5.64,10.18l-64,40A12,12,0,0,1,164,200V120a12,12,0,0,1,18.36-10.18l64,40A12,12,0,0,1,252,160Zm-34.64,0L188,141.65v36.7Z"
+                    ></path>
+                  </svg>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="icon-16"
+                    viewBox="0 0 256 256"
+                  >
+                    <path
+                      d="M240,128a15.74,15.74,0,0,1-7.6,13.51L88.32,229.65a16,16,0,0,1-16.2.3A15.86,15.86,0,0,1,64,216.13V39.87a15.86,15.86,0,0,1,8.12-13.82,16,16,0,0,1,16.2.3L232.4,114.49A15.74,15.74,0,0,1,240,128Z"
+                    ></path>
+                  </svg>
+                </div>
+              </div>
+            </button>
+            <button class="card">
+              <img
+                class="image-160"
+                loading="lazy"
+                src="https://i.postimg.cc/GmY1PMRc/image(6).avif"
+                alt=""
+              />
+              <div class="flex items-center justify-between px-1">
+                <div class="flex flex-col items-start gap-0.5">
+                  <span class="text-normal text-[0.8rem] font-bold"
+                    >i love u.</span
+                  >
+                  <span class="subtext-normal">wiv.</span>
+                </div>
+                <div class="flex items-center gap-3">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="icon-16"
+                    viewBox="0 0 256 256"
+                  >
+                    <path
+                      d="M28,64A12,12,0,0,1,40,52H216a12,12,0,0,1,0,24H40A12,12,0,0,1,28,64Zm104,52H40a12,12,0,0,0,0,24h92a12,12,0,0,0,0-24Zm0,64H40a12,12,0,0,0,0,24h92a12,12,0,0,0,0-24Zm120-20a12,12,0,0,1-5.64,10.18l-64,40A12,12,0,0,1,164,200V120a12,12,0,0,1,18.36-10.18l64,40A12,12,0,0,1,252,160Zm-34.64,0L188,141.65v36.7Z"
+                    ></path>
+                  </svg>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="icon-16"
+                    viewBox="0 0 256 256"
+                  >
+                    <path
+                      d="M240,128a15.74,15.74,0,0,1-7.6,13.51L88.32,229.65a16,16,0,0,1-16.2.3A15.86,15.86,0,0,1,64,216.13V39.87a15.86,15.86,0,0,1,8.12-13.82,16,16,0,0,1,16.2.3L232.4,114.49A15.74,15.74,0,0,1,240,128Z"
+                    ></path>
+                  </svg>
+                </div>
+              </div>
+            </button>
+            <button class="card">
+              <img
+                class="image-160"
+                loading="lazy"
+                src="https://i.postimg.cc/GmY1PMRc/image(6).avif"
+                alt=""
+              />
+              <div class="flex items-center justify-between px-1">
+                <div class="flex flex-col items-start gap-0.5">
+                  <span class="text-normal text-[0.8rem] font-bold"
+                    >i love u.</span
+                  >
+                  <span class="subtext-normal">wiv.</span>
+                </div>
+                <div class="flex items-center gap-3">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="icon-16"
+                    viewBox="0 0 256 256"
+                  >
+                    <path
+                      d="M28,64A12,12,0,0,1,40,52H216a12,12,0,0,1,0,24H40A12,12,0,0,1,28,64Zm104,52H40a12,12,0,0,0,0,24h92a12,12,0,0,0,0-24Zm0,64H40a12,12,0,0,0,0,24h92a12,12,0,0,0,0-24Zm120-20a12,12,0,0,1-5.64,10.18l-64,40A12,12,0,0,1,164,200V120a12,12,0,0,1,18.36-10.18l64,40A12,12,0,0,1,252,160Zm-34.64,0L188,141.65v36.7Z"
+                    ></path>
+                  </svg>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="icon-16"
+                    viewBox="0 0 256 256"
+                  >
+                    <path
+                      d="M240,128a15.74,15.74,0,0,1-7.6,13.51L88.32,229.65a16,16,0,0,1-16.2.3A15.86,15.86,0,0,1,64,216.13V39.87a15.86,15.86,0,0,1,8.12-13.82,16,16,0,0,1,16.2.3L232.4,114.49A15.74,15.74,0,0,1,240,128Z"
+                    ></path>
+                  </svg>
+                </div>
+              </div>
+            </button>
+            <button class="card">
+              <img
+                class="image-160"
+                loading="lazy"
+                src="https://i.postimg.cc/GmY1PMRc/image(6).avif"
+                alt=""
+              />
+              <div class="flex items-center justify-between px-1">
+                <div class="flex flex-col items-start gap-0.5">
+                  <span class="text-normal text-[0.8rem] font-bold"
+                    >i love u.</span
+                  >
+                  <span class="subtext-normal">wiv.</span>
+                </div>
+                <div class="flex items-center gap-3">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="icon-16"
+                    viewBox="0 0 256 256"
+                  >
+                    <path
+                      d="M28,64A12,12,0,0,1,40,52H216a12,12,0,0,1,0,24H40A12,12,0,0,1,28,64Zm104,52H40a12,12,0,0,0,0,24h92a12,12,0,0,0,0-24Zm0,64H40a12,12,0,0,0,0,24h92a12,12,0,0,0,0-24Zm120-20a12,12,0,0,1-5.64,10.18l-64,40A12,12,0,0,1,164,200V120a12,12,0,0,1,18.36-10.18l64,40A12,12,0,0,1,252,160Zm-34.64,0L188,141.65v36.7Z"
+                    ></path>
+                  </svg>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="icon-16"
+                    viewBox="0 0 256 256"
+                  >
+                    <path
+                      d="M240,128a15.74,15.74,0,0,1-7.6,13.51L88.32,229.65a16,16,0,0,1-16.2.3A15.86,15.86,0,0,1,64,216.13V39.87a15.86,15.86,0,0,1,8.12-13.82,16,16,0,0,1,16.2.3L232.4,114.49A15.74,15.74,0,0,1,240,128Z"
+                    ></path>
+                  </svg>
+                </div>
+              </div>
+            </button>
+            <button class="card">
+              <img
+                class="image-160"
+                loading="lazy"
+                src="https://i.postimg.cc/GmY1PMRc/image(6).avif"
+                alt=""
+              />
+              <div class="flex items-center justify-between px-1">
+                <div class="flex flex-col items-start gap-0.5">
+                  <span class="text-normal text-[0.8rem] font-bold"
+                    >i love u.</span
+                  >
+                  <span class="subtext-normal">wiv.</span>
+                </div>
+                <div class="flex items-center gap-3">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="icon-16"
+                    viewBox="0 0 256 256"
+                  >
+                    <path
+                      d="M28,64A12,12,0,0,1,40,52H216a12,12,0,0,1,0,24H40A12,12,0,0,1,28,64Zm104,52H40a12,12,0,0,0,0,24h92a12,12,0,0,0,0-24Zm0,64H40a12,12,0,0,0,0,24h92a12,12,0,0,0,0-24Zm120-20a12,12,0,0,1-5.64,10.18l-64,40A12,12,0,0,1,164,200V120a12,12,0,0,1,18.36-10.18l64,40A12,12,0,0,1,252,160Zm-34.64,0L188,141.65v36.7Z"
+                    ></path>
+                  </svg>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="icon-16"
+                    viewBox="0 0 256 256"
+                  >
+                    <path
+                      d="M240,128a15.74,15.74,0,0,1-7.6,13.51L88.32,229.65a16,16,0,0,1-16.2.3A15.86,15.86,0,0,1,64,216.13V39.87a15.86,15.86,0,0,1,8.12-13.82,16,16,0,0,1,16.2.3L232.4,114.49A15.74,15.74,0,0,1,240,128Z"
+                    ></path>
+                  </svg>
+                </div>
+              </div>
+            </button>
+            <button class="card">
+              <img
+                class="image-160"
+                loading="lazy"
+                src="https://i.postimg.cc/GmY1PMRc/image(6).avif"
+                alt=""
+              />
+              <div class="flex items-center justify-between px-1">
+                <div class="flex flex-col items-start gap-0.5">
+                  <span class="text-normal text-[0.8rem] font-bold"
+                    >i love u.</span
+                  >
+                  <span class="subtext-normal">wiv.</span>
+                </div>
+                <div class="flex items-center gap-3">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="icon-16"
+                    viewBox="0 0 256 256"
+                  >
+                    <path
+                      d="M28,64A12,12,0,0,1,40,52H216a12,12,0,0,1,0,24H40A12,12,0,0,1,28,64Zm104,52H40a12,12,0,0,0,0,24h92a12,12,0,0,0,0-24Zm0,64H40a12,12,0,0,0,0,24h92a12,12,0,0,0,0-24Zm120-20a12,12,0,0,1-5.64,10.18l-64,40A12,12,0,0,1,164,200V120a12,12,0,0,1,18.36-10.18l64,40A12,12,0,0,1,252,160Zm-34.64,0L188,141.65v36.7Z"
+                    ></path>
+                  </svg>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="icon-16"
+                    viewBox="0 0 256 256"
+                  >
+                    <path
+                      d="M240,128a15.74,15.74,0,0,1-7.6,13.51L88.32,229.65a16,16,0,0,1-16.2.3A15.86,15.86,0,0,1,64,216.13V39.87a15.86,15.86,0,0,1,8.12-13.82,16,16,0,0,1,16.2.3L232.4,114.49A15.74,15.74,0,0,1,240,128Z"
+                    ></path>
+                  </svg>
+                </div>
+              </div>
+            </button>
+            <button class="card">
+              <img
+                class="image-160"
+                loading="lazy"
+                src="https://i.postimg.cc/GmY1PMRc/image(6).avif"
+                alt=""
+              />
+              <div class="flex items-center justify-between px-1">
+                <div class="flex flex-col items-start gap-0.5">
+                  <span class="text-normal text-[0.8rem] font-bold"
+                    >i love u.</span
+                  >
+                  <span class="subtext-normal">wiv.</span>
+                </div>
+                <div class="flex items-center gap-3">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="icon-16"
+                    viewBox="0 0 256 256"
+                  >
+                    <path
+                      d="M28,64A12,12,0,0,1,40,52H216a12,12,0,0,1,0,24H40A12,12,0,0,1,28,64Zm104,52H40a12,12,0,0,0,0,24h92a12,12,0,0,0,0-24Zm0,64H40a12,12,0,0,0,0,24h92a12,12,0,0,0,0-24Zm120-20a12,12,0,0,1-5.64,10.18l-64,40A12,12,0,0,1,164,200V120a12,12,0,0,1,18.36-10.18l64,40A12,12,0,0,1,252,160Zm-34.64,0L188,141.65v36.7Z"
+                    ></path>
+                  </svg>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="icon-16"
+                    viewBox="0 0 256 256"
+                  >
+                    <path
+                      d="M240,128a15.74,15.74,0,0,1-7.6,13.51L88.32,229.65a16,16,0,0,1-16.2.3A15.86,15.86,0,0,1,64,216.13V39.87a15.86,15.86,0,0,1,8.12-13.82,16,16,0,0,1,16.2.3L232.4,114.49A15.74,15.74,0,0,1,240,128Z"
+                    ></path>
+                  </svg>
+                </div>
+              </div>
+            </button>
+          </div>
+        </main>
+        <button
+          class="collapse-right-bar button text-normal flex h-8 w-8 items-center justify-center gap-2"
+        >
+         <svg xmlns="http://www.w3.org/2000/svg" class="icon-12" viewBox="0 0 256 256"><path d="M168.49,199.51a12,12,0,0,1-17,17l-80-80a12,12,0,0,1,0-17l80-80a12,12,0,0,1,17,17L97,128Z"></path></svg>
+        </button>
+        <aside id="right-bar">
+          <div class="flex w-full items-start gap-3">
+            <img
+              loading="lazy"
+              class="image-24 border-border-2 h-20 w-20 rounded-lg border-2"
+              src="https://i.postimg.cc/g2cpNY20/image(5).avif"
+              alt=""
+            />
+            <div class="flex flex-col gap-2.5">
+              <div class="flex flex-col gap-1">
+                <span class="text-normal font-bold text-base whitespace-nowrap"
+                  >i love u.</span
+                >
+                <span class="subtext-normal text-xs whitespace-nowrap"
+                  >wiv.</span
+                >
+              </div>
+              <div class="flex gap-3">
+                <span class="subtext-normal whitespace-nowrap"
+                  >68.3K listeners</span
+                >
+                <span class="subtext-normal whitespace-nowrap">
+                  3 variations
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="button flex w-full flex-col gap-2.5 p-2">
+            <span class="text-normal font-bold">About</span>
+            <div class="flex flex-col gap-1">
+              <span class="subtext-normal"
+                >First apparition:<span class="text-normal">
+                  23 March 2025</span
+                ></span
+              >
+              <span class="subtext-normal"
+                >Average listening time:<span class="text-normal">
+                  1:18</span
+                ></span
+              >
+              <span class="subtext-normal"
+                >Listeners (LastFM):<span class="text-normal">
+                  68.3K</span
+                ></span
+              >
+            </div>
+            <div class="flex flex-col gap-1">
+              <span class="subtext-normal">Genres</span>
+              <div class="flex gap-1">
+                <button
+                  class="button text-normal flex min-h-8 items-center justify-center gap-2 px-4"
+                >
+                  Breakcore
+                </button>
+                <button
+                  class="button text-normal flex min-h-8 items-center justify-center gap-2 px-4"
+                >
+                  Electronic
+                </button>
+                <button
+                  class="button text-normal flex min-h-8 min-w-8 items-center justify-center gap-2"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="icon-12"
+                    viewBox="0 0 256 256"
+                  >
+                    <path
+                      d="M184.49,136.49l-80,80a12,12,0,0,1-17-17L159,128,87.51,56.49a12,12,0,1,1,17-17l80,80A12,12,0,0,1,184.49,136.49Z"
+                    ></path>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="flex w-[98%] flex-col gap-1">
+            <div class="flex justify-between">
+              <span class="text-normal">1:18</span>
+              <span class="text-normal">2:02</span>
+            </div>
+            <input
+              type="range"
+              min="20"
+              max="300"
+              value="0"
+              class="bg-subtext [&::-webkit-slider-thumb]:bg-accent h-2.5 w-full min-w-10 appearance-none rounded-full [&::-webkit-slider-thumb]:h-2.5 [&::-webkit-slider-thumb]:w-6 [&::-webkit-slider-thumb]:cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full"
+            />
+          </div>
+          <div class="flex w-full items-center justify-between">
+            <button class="flex h-fit w-fit items-center justify-center">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="icon-16"
+                viewBox="0 0 256 256"
+              >
+                <path
+                  d="M28,64A12,12,0,0,1,40,52H216a12,12,0,0,1,0,24H40A12,12,0,0,1,28,64Zm12,76H156a12,12,0,0,0,0-24H40a12,12,0,0,0,0,24Zm68,40H40a12,12,0,0,0,0,24h68a12,12,0,0,0,0-24Zm143.49-52.55a12,12,0,0,1-14.94,8L212,128.13V192a36,36,0,1,1-24-33.94V112a12,12,0,0,1,15.45-11.49l40,12A12,12,0,0,1,251.49,127.45ZM188,192a12,12,0,1,0-12,12A12,12,0,0,0,188,192Z"
+                ></path>
+              </svg>
+            </button>
+            <button
+              class="bg-accent flex min-h-10 min-w-10 items-center justify-center rounded-xl"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="icon-16 fill-element"
+                viewBox="0 0 256 256"
+              >
+                <path
+                  d="M216,48V208a16,16,0,0,1-16,16H160a16,16,0,0,1-16-16V48a16,16,0,0,1,16-16h40A16,16,0,0,1,216,48ZM96,32H56A16,16,0,0,0,40,48V208a16,16,0,0,0,16,16H96a16,16,0,0,0,16-16V48A16,16,0,0,0,96,32Z"
+                ></path>
+              </svg>
+            </button>
+            <button class="flex h-fit w-fit items-center justify-center">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="icon-16 fill-accent"
+                viewBox="0 0 256 256"
+              >
+                <path
+                  d="M240,102c0,70-103.79,126.66-108.21,129a8,8,0,0,1-7.58,0C119.79,228.66,16,172,16,102A62.07,62.07,0,0,1,78,40c20.65,0,38.73,8.88,50,23.89C139.27,48.88,157.35,40,178,40A62.07,62.07,0,0,1,240,102Z"
+                ></path>
+              </svg>
+            </button>
+            <button class="flex h-fit w-fit items-center justify-center">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="icon-16"
+                viewBox="0 0 256 256"
+              >
+                <path
+                  d="M240.49,103.52l-80-80A12,12,0,0,0,140,32V68.74c-25.76,3.12-53.66,15.89-76.75,35.47-29.16,24.74-47.32,56.69-51.14,90A16,16,0,0,0,39.67,207h0c10.46-11.14,47-45.74,100.33-50.42V192a12,12,0,0,0,20.48,8.48l80-80A12,12,0,0,0,240.49,103.52ZM164,163V144a12,12,0,0,0-12-12c-49,0-86.57,21.56-109.79,40.11,7.13-18.16,19.63-35.22,36.57-49.59C101.3,103.41,128.67,92,152,92a12,12,0,0,0,12-12V61l51,51Z"
+                ></path>
+              </svg>
+            </button>
+            <button class="flex h-fit w-fit items-center justify-center">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="icon-16"
+                viewBox="0 0 256 256"
+              >
+                <path
+                  d="M208,36H48A28,28,0,0,0,20,64V176a28,28,0,0,0,28,28H208a28,28,0,0,0,28-28V64A28,28,0,0,0,208,36Zm4,140a4,4,0,0,1-4,4H48a4,4,0,0,1-4-4V64a4,4,0,0,1,4-4H208a4,4,0,0,1,4,4Zm-40,52a12,12,0,0,1-12,12H96a12,12,0,0,1,0-24h64A12,12,0,0,1,172,228ZM160.49,103.51a12,12,0,0,1-17,17L140,117v35a12,12,0,0,1-24,0V117l-3.51,3.52a12,12,0,0,1-17-17l24-24a12,12,0,0,1,17,0Z"
+                ></path>
+              </svg>
+            </button>
+            <button class="flex h-fit w-fit items-center justify-center">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="icon-16"
+                viewBox="0 0 256 256"
+              >
+                <path
+                  d="M228,144v64a12,12,0,0,1-12,12H40a12,12,0,0,1-12-12V144a12,12,0,0,1,24,0v52H204V144a12,12,0,0,1,24,0Zm-108.49,8.49a12,12,0,0,0,17,0l40-40a12,12,0,0,0-17-17L140,115V32a12,12,0,0,0-24,0v83L96.49,95.51a12,12,0,0,0-17,17Z"
+                ></path>
+              </svg>
+            </button>
+          </div>
+          <div class="button flex w-full flex-col gap-2.5 p-2">
+            <span class="text-normal font-bold">Variations</span>
+            <div class="flex flex-col gap-1">
+              <div class="flex flex-col gap-1.5">
+                <button
+                  class="button text-normal flex min-h-8 w-full items-center gap-2 p-1.5"
+                >
+                  <div class="flex items-center gap-2">
+                    <img
+                      class="image-24"
+                      loading="lazy"
+                      src="https://i.postimg.cc/g2cpNY20/image(5).avif"
+                      alt=""
+                    />
+                    <span>i love u.</span>
+                  </div>
+                </button>
+                <button
+                  class="button text-normal flex min-h-8 w-full items-center gap-2 p-1.5"
+                >
+                  <div class="flex items-center gap-2">
+                    <img
+                      class="image-24"
+                      loading="lazy"
+                      src="https://i.postimg.cc/g2cpNY20/image(5).avif"
+                      alt=""
+                    />
+                    <span>i love you. - slowed+reverb</span>
+                  </div>
+                </button>
+                <button
+                  class="button text-normal flex min-h-8 w-full items-center gap-2 p-1.5"
+                >
+                  <div class="flex items-center gap-2">
+                    <img
+                      class="image-24"
+                      loading="lazy"
+                      src="https://i.postimg.cc/g2cpNY20/image(5).avif"
+                      alt=""
+                    />
+                    <span>i love you. - sped up+reverb</span>
+                  </div>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div
+            class="button flex w-full items-center justify-between gap-4 p-2"
+          >
+            <div class="flex items-center gap-2.5">
+              <img
+                class="image-24 min-h-10 min-w-10"
+                loading="lazy"
+                src="https://i.postimg.cc/GmY1PMRc/image(6).avif"
+                alt=""
+              />
+              <div class="flex flex-col">
+                <span class="text-normal text-[0.7rem] font-bold">wiv</span>
+                <span class="subtext-normal">Artist</span>
+              </div>
+            </div>
+            <div class="flex items-center gap-1">
+              <button
+                class="button text-normal flex min-h-8 items-center justify-center gap-2 px-4"
+              >
+                Kofi
+              </button>
+              <button
+                class="button text-normal flex min-h-8 items-center justify-center gap-2 px-4"
+              >
+                Follow
+              </button>
+            </div>
+          </div>
+        </aside>
+        
+        </button>
+      </div>      
+      <footer>
+        <div class="flex items-center gap-3">
+          <div
+            class="button text-normal flex items-center justify-between gap-2 px-2 py-2"
+            id="volume-change"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="icon-12"
+              viewBox="0 0 256 256"
+            >
+              <path
+                d="M165.27,21.22a12,12,0,0,0-12.64,1.31L83.88,76H40A20,20,0,0,0,20,96v64a20,20,0,0,0,20,20H83.88l68.75,53.47A12,12,0,0,0,172,224V32A12,12,0,0,0,165.27,21.22ZM148,199.47,95.37,158.53A12,12,0,0,0,88,156H44V100H88a12,12,0,0,0,7.37-2.53L148,56.54ZM212,104v48a12,12,0,0,1-24,0V104a12,12,0,0,1,24,0Zm36-16v80a12,12,0,0,1-24,0V88a12,12,0,0,1,24,0Z"
+              ></path>
+            </svg>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="icon-12"
+              viewBox="0 0 256 256"
+            >
+              <path
+                d="M204.73,51.85A108.07,108.07,0,0,0,20,128v56a28,28,0,0,0,28,28H64a28,28,0,0,0,28-28V144a28,28,0,0,0-28-28H44.84A84.05,84.05,0,0,1,128,44h.64a83.7,83.7,0,0,1,82.52,72H192a28,28,0,0,0-28,28v40a28,28,0,0,0,28,28h16a28,28,0,0,0,28-28V128A107.34,107.34,0,0,0,204.73,51.85ZM64,140a4,4,0,0,1,4,4v40a4,4,0,0,1-4,4H48a4,4,0,0,1-4-4V140Zm148,44a4,4,0,0,1-4,4H192a4,4,0,0,1-4-4V144a4,4,0,0,1,4-4h20Z"
+              ></path>
+            </svg>
+            <input
+              type="range"
+              min="0"
+              max="100"
+              value="75"
+              class="bg-subtext [&::-webkit-slider-thumb]:bg-accent h-1.5 w-20 appearance-none rounded-full [&::-webkit-slider-thumb]:h-1.5 [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full"
+            />
+          </div>
+          <div class="flex items-center gap-3">
+            <button class="flex h-fit w-fit items-center justify-center">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="icon-16"
+                viewBox="0 0 256 256"
+              >
+                <path
+                  d="M240.49,175.51a12,12,0,0,1,0,17l-24,24a12,12,0,0,1-17-17L203,196h-2.09a76.17,76.17,0,0,1-61.85-31.83L97.38,105.78A52.1,52.1,0,0,0,55.06,84H32a12,12,0,0,1,0-24H55.06a76.17,76.17,0,0,1,61.85,31.83l41.71,58.39A52.1,52.1,0,0,0,200.94,172H203l-3.52-3.51a12,12,0,0,1,17-17Zm-95.62-72.62a12,12,0,0,0,16.93-1.13A52,52,0,0,1,200.94,84H203l-3.52,3.51a12,12,0,0,0,17,17l24-24a12,12,0,0,0,0-17l-24-24a12,12,0,0,0-17,17L203,60h-2.09a76,76,0,0,0-57.2,26A12,12,0,0,0,144.87,102.89Zm-33.74,50.22a12,12,0,0,0-16.93,1.13A52,52,0,0,1,55.06,172H32a12,12,0,0,0,0,24H55.06a76,76,0,0,0,57.2-26A12,12,0,0,0,111.13,153.11Z"
+                ></path>
+              </svg>
+            </button>
+            <button class="flex h-fit w-fit items-center justify-center">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="icon-16"
+                viewBox="0 0 256 256"
+              >
+                <path
+                  d="M201.75,30.52a20,20,0,0,0-20.3.53L68,102V40a12,12,0,0,0-24,0V216a12,12,0,0,0,24,0V154l113.45,71A20,20,0,0,0,212,208.12V47.88A19.86,19.86,0,0,0,201.75,30.52ZM188,200.73,71.7,128,188,55.27Z"
+                ></path>
+              </svg>
+            </button>
+            <button
+              class="bg-accent flex min-h-10 min-w-10 items-center justify-center rounded-xl"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="icon-16 fill-element"
+                viewBox="0 0 256 256"
+              >
+                <path
+                  d="M216,48V208a16,16,0,0,1-16,16H160a16,16,0,0,1-16-16V48a16,16,0,0,1,16-16h40A16,16,0,0,1,216,48ZM96,32H56A16,16,0,0,0,40,48V208a16,16,0,0,0,16,16H96a16,16,0,0,0,16-16V48A16,16,0,0,0,96,32Z"
+                ></path>
+              </svg>
+            </button>
+            <button class="flex h-fit w-fit items-center justify-center">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="icon-16"
+                viewBox="0 0 256 256"
+              >
+                <path
+                  d="M200,28a12,12,0,0,0-12,12v62l-113.45-71A20,20,0,0,0,44,47.88V208.12A20,20,0,0,0,74.55,225L188,154v62a12,12,0,0,0,24,0V40A12,12,0,0,0,200,28ZM68,200.73V55.27L184.3,128Z"
+                ></path>
+              </svg>
+            </button>
+            <button class="flex h-fit w-fit items-center justify-center">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="icon-16"
+                viewBox="0 0 256 256"
+              >
+                <path
+                  d="M20,128A76.08,76.08,0,0,1,96,52h99l-3.52-3.51a12,12,0,1,1,17-17l24,24a12,12,0,0,1,0,17l-24,24a12,12,0,0,1-17-17L195,76H96a52.06,52.06,0,0,0-52,52,12,12,0,0,1-24,0Zm204-12a12,12,0,0,0-12,12,52.06,52.06,0,0,1-52,52H61l3.52-3.51a12,12,0,1,0-17-17l-24,24a12,12,0,0,0,0,17l24,24a12,12,0,1,0,17-17L61,204h99a76.08,76.08,0,0,0,76-76A12,12,0,0,0,224,116Z"
+                ></path>
+              </svg>
+            </button>
+            <button class="flex h-fit w-fit items-center justify-center">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="icon-16 fill-accent"
+                viewBox="0 0 256 256"
+              >
+                <path
+                  d="M240,102c0,70-103.79,126.66-108.21,129a8,8,0,0,1-7.58,0C119.79,228.66,16,172,16,102A62.07,62.07,0,0,1,78,40c20.65,0,38.73,8.88,50,23.89C139.27,48.88,157.35,40,178,40A62.07,62.07,0,0,1,240,102Z"
+                ></path>
+              </svg>
+            </button>
+          </div>
+        </div>
+        <div
+          id="middle-bottom-bar"
+          class="inline-flex max-w-140 flex-1 items-center gap-5"
+        >
+          <div class="flex items-center gap-2.5">
+            <img
+              loading="lazy"
+              class="image-24 button min-h-10 min-w-10 rounded-lg"
+              src="https://i.postimg.cc/g2cpNY20/image(5).avif"
+              alt=""
+            />
+            <div class="flex flex-col gap-0.5">
+              <span class="text-normal text-xs whitespace-nowrap"
+                >i love u.</span
+              >
+              <span class="subtext-normal whitespace-nowrap">wiv.</span>
+            </div>
+          </div>
+          <div class="flex flex-1 items-center gap-2.5">
+            <span class="text-normal">1:18</span>
+            <input
+              type="range"
+              min="0"
+              max="300"
+              value="0"
+              class="bg-subtext [&::-webkit-slider-thumb]:bg-accent h-2.5 w-full min-w-10 appearance-none rounded-full [&::-webkit-slider-thumb]:h-2.5 [&::-webkit-slider-thumb]:w-6 [&::-webkit-slider-thumb]:cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full"
+            />
+            <span class="text-normal">2:02</span>
+          </div>
+        </div>
+        <div id="tools" class="flex items-center gap-2.5">
+          <button class="flex h-fit w-fit items-center justify-center">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="icon-16"
+              viewBox="0 0 256 256"
+            >
+              <path
+                d="M240.49,103.52l-80-80A12,12,0,0,0,140,32V68.74c-25.76,3.12-53.66,15.89-76.75,35.47-29.16,24.74-47.32,56.69-51.14,90A16,16,0,0,0,39.67,207h0c10.46-11.14,47-45.74,100.33-50.42V192a12,12,0,0,0,20.48,8.48l80-80A12,12,0,0,0,240.49,103.52ZM164,163V144a12,12,0,0,0-12-12c-49,0-86.57,21.56-109.79,40.11,7.13-18.16,19.63-35.22,36.57-49.59C101.3,103.41,128.67,92,152,92a12,12,0,0,0,12-12V61l51,51Z"
+              ></path>
+            </svg>
+          </button>
+          <button class="flex h-fit w-fit items-center justify-center">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="icon-16"
+              viewBox="0 0 256 256"
+            >
+              <path
+                d="M208,36H48A28,28,0,0,0,20,64V176a28,28,0,0,0,28,28H208a28,28,0,0,0,28-28V64A28,28,0,0,0,208,36Zm4,140a4,4,0,0,1-4,4H48a4,4,0,0,1-4-4V64a4,4,0,0,1,4-4H208a4,4,0,0,1,4,4Zm-40,52a12,12,0,0,1-12,12H96a12,12,0,0,1,0-24h64A12,12,0,0,1,172,228ZM160.49,103.51a12,12,0,0,1-17,17L140,117v35a12,12,0,0,1-24,0V117l-3.51,3.52a12,12,0,0,1-17-17l24-24a12,12,0,0,1,17,0Z"
+              ></path>
+            </svg>
+          </button>
+          <button
+            class="button text-normal flex min-h-8 items-center justify-center gap-2 px-4"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="icon-12"
+              viewBox="0 0 256 256"
+            >
+              <path
+                d="M228,144v64a12,12,0,0,1-12,12H40a12,12,0,0,1-12-12V144a12,12,0,0,1,24,0v52H204V144a12,12,0,0,1,24,0Zm-108.49,8.49a12,12,0,0,0,17,0l40-40a12,12,0,0,0-17-17L140,115V32a12,12,0,0,0-24,0v83L96.49,95.51a12,12,0,0,0-17,17Z"
+              ></path>
+            </svg>
+            Download
+          </button>
+          <button class="flex h-fit w-fit items-center justify-center">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="icon-16 fill-accent"
+              viewBox="0 0 256 256"
+            >
+              <path
+                d="M252,160a44.05,44.05,0,0,1-44,44H190.57a60.2,60.2,0,0,1-54.37-34.63l-30.15-64.59A36.13,36.13,0,0,0,73.43,84H64a36,36,0,0,0-36,36v24a36,36,0,0,0,36,36h8a28,28,0,0,0,25.68-16.8,12,12,0,1,1,22,9.6A52,52,0,0,1,72,204H64A60.07,60.07,0,0,1,4,144V120A60.07,60.07,0,0,1,64,60h9.43A60.2,60.2,0,0,1,127.8,94.63L158,159.22A36.13,36.13,0,0,0,190.57,180H208a20,20,0,0,0,0-40H188a40,40,0,0,1,0-80h20a36,36,0,0,1,36,36,12,12,0,0,1-24,0,12,12,0,0,0-12-12H188a16,16,0,0,0,0,32h20A44.05,44.05,0,0,1,252,160Z"
+              ></path>
+            </svg>
+          </button>
+        </div>
+      </footer>
+    </div>
+    <div class="effect"></div>
+    <script>
+const collapseRightBar = document.querySelector(".collapse-right-bar");
+const rightBar = document.querySelector("#right-bar");
+
+collapseRightBar.addEventListener("click", () => {
+  if (rightBar.style.display === "flex") {
+    rightBar.style.display = "none"; 
+    collapseRightBar.style.transform = "";
+        collapseRightBar.style.backgroundColor = "";
+    collapseRightBar.style.borderColor = "";
+    collapseRightBar.style.boxShadow = "";
+  } else {
+    rightBar.style.display = "flex";
+    collapseRightBar.style.transform = "rotate(180deg)";
+    collapseRightBar.style.boxShadow = "none";
+  }
+});
+
+const leftBar = document.getElementById("left-bar");
+const collapseLeftBar = document.getElementById("collapse-left-bar");
+const leftBarkids = leftBar.querySelectorAll('button:not(:first-of-type), .subtext-normal');
+
+collapseLeftBar.addEventListener("click", () => {
+  if (leftBar.style.height === "") {
+    leftBarkids.forEach((btn) => {
+      btn.style.display = "none";
+      leftBar.style.height = "fit-content";
+    });
+  }else{
+    leftBarkids.forEach((btn) => {
+      btn.style.display = "flex";
+      leftBar.style.height = "";
+    });
+  }
+})
+    </script>
+  </body>
+</html>
