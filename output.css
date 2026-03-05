@@ -434,19 +434,19 @@
   font-family: "Inter";
   font-weight: semibold;
   display: swap;
-  src: url(/assets/inter-v20-latin/inter-v20-latin-500.woff2) format("woff2");
+  src: url(./assets/inter-v20-latin/inter-v20-latin-500.woff2) format("woff2");
 }
 @font-face {
   font-family: "Inter";
   font-weight: bold;
   display: swap;
-  src: url(/assets/inter-v20-latin/inter-v20-latin-600.woff2) format("woff2");
+  src: url(./assets/inter-v20-latin/inter-v20-latin-600.woff2) format("woff2");
 }
 @font-face {
   font-family: "Inter";
   font-weight: 700;
   display: swap;
-  src: url(/assets/inter-v20-latin/inter-v20-latin-700.woff2) format("woff2");
+  src: url(./assets/inter-v20-latin/inter-v20-latin-700.woff2) format("woff2");
 }
 * {
   user-select: none;
